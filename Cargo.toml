@@ -6,6 +6,7 @@ edition = "2024"
 authors = ["Simon Laux <git@simonlaux.de>", "WofWca <wofwca@protonmail.com>"]
 license = "LGPL-3-or-later"
 keywords = ["notify", "notification", "UserNotification", "desktop-notifications", "linux", "windows", "macOS"]
+repository = "https://github.com/Simon-Laux/user-notify"
 
 [dependencies]
 anyhow = "1.0.97"

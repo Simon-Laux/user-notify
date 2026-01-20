@@ -1,6 +1,6 @@
 # `user-notify`
 
-Simple library to implement user facing notifications on macOS, Linux and Windows.
+Simple library to implement user facing notifications in end-user applications on macOS, Linux and Windows.
 
 The name `user-notify` is inspired by how the system API is called in the Apple ecosystem (“User Notifications”).
 
@@ -20,6 +20,8 @@ and offers enough of the platform specific API to be useful for creating full ap
 - Async API with [Tokio](https://tokio.rs/).
 - Not many dependencies.
 
+If you this crate is not for you, then you may like <https://github.com/hoodie/notify-rust>, which is an established crate, but has less feature support on macOS.
+
 ### System Requirements:
 - macOS 10.14 or above
   - Note for developers: on macOS this only works inside an app package with a “Bundle ID”, also you need an Apple developer account to sign it.
@@ -30,7 +32,6 @@ and offers enough of the platform specific API to be useful for creating full ap
 TODO <!--- TODO: feature by OS table--->
 
 ## Usage
-
 
 TODO <!-- TODO -->
 

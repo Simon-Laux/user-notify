@@ -88,7 +88,7 @@ Just be nice to everyone, if you are unsure what being nice and fair means, then
 
 - [Simon Laux](https://github.com/Simon-Laux)
 - [Wofwca](https://github.com/WofWca)
-- ...maybe you to?
+- ...maybe you too?
 
 ### Funding
 

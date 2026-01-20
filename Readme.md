@@ -12,8 +12,8 @@ and offers enough of the platform specific API to be useful for creating full ap
 
 - Uses system APIs directly, you can contribute to this crate to add options for using the rest of the system API.
   - In the future this crate could even support contact avatars and macOS focus.
-- Buttons in notifications (windows, macOS, to do: Linux).
-- Inline Reply to notifications (windows, macOS).
+- Buttons in notifications (macOS, todo: windows, Linux).
+- Inline Reply to notifications (macOS, todo: windows).
 - Images in notifications.
 - Notifications are identified by metadata that you can add to them (windows, macOS).
 - Notification can persist across sessions and can be used to start your app (windows, macOS).
@@ -26,9 +26,13 @@ and offers enough of the platform specific API to be useful for creating full ap
 - Windows 10 or above
 - Linux with a desktop/notification-daemon which supports the `org.freedesktop.Notifications` dbus protocol. (most modern desktop environments do)
 
+### Features by operating system
+TODO <!--- TODO: feature by OS table--->
+
 ## Usage
 
-<!--- TODO: feature by OS table--->
+
+TODO <!-- TODO -->
 
 ## History of this crate
 
@@ -36,8 +40,6 @@ This library was initially created as replacement for tauri's notification APIs,
 implement all notification features that we needed for our project
 of porting the [Delta Chat instant messenger](https://github.com/deltachat/deltachat-desktop) from electron to [tauri](https://tauri.app/)
 (Basic features like reacting to clicks on notifications were missing in the rust api).
-
-Since this was part of the Delta Chat Tauri project, the initial work on this was funded through [NGI0 Entrust](https://nlnet.nl/entrust), a fund established by [NLnet](https://nlnet.nl) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu) program. Learn more at the [NLnet project page](https://nlnet.nl/project/DeltaTauri).
 
 ## Testing the example
 
@@ -58,6 +60,7 @@ You can build and package the example (`examples/test.rs`) for macOS with this h
 
 ## Windows
 TODO: instructions for windows (I don't remember if it also needed custom steps)
+<!--- TODO -->
 
 ## Useful Links
 
@@ -77,3 +80,16 @@ These links can be useful for reference when contributing to this plugin.
 
 Contributions are welcome.
 Just be nice to everyone, if you are unsure what being nice and fair means, then refer to <https://delta.chat/en/community-standards>.
+
+## Credits
+
+### Contributors
+
+- [Simon Laux](https://github.com/Simon-Laux)
+- [Wofwca](https://github.com/WofWca)
+- ...maybe you to?
+
+### Funding
+
+- Since this was part of the Delta Chat Tauri project, the initial work on this was funded through [NGI0 Entrust](https://nlnet.nl/entrust), a fund established by [NLnet](https://nlnet.nl) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu) program. Learn more at the [NLnet project page](https://nlnet.nl/project/DeltaTauri).
+- Contact us if you want to sponsor a feature: git@simonlaux.de

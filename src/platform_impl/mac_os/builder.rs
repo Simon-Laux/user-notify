@@ -95,7 +95,7 @@ fn build(
         if let Some(payload) = builder.user_info {
             let mut user_info_keys = Vec::with_capacity(payload.len());
             let mut user_info_values = Vec::with_capacity(payload.len());
-            for (key, value) in payload.iter() {
+            for (key, value) in &payload {
                 user_info_keys.push(NSString::from_str(key));
                 user_info_values.push(NSString::from_str(value));
             }

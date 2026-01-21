@@ -1,3 +1,6 @@
+//! Show desktop notifications to end users on linux, macOS and windows.
+//!
+//! If you want to see the platform implementation and view this on docs.rs, then make sure to select the correct platform in the header bar.
 mod error;
 mod notification;
 mod platform_impl;

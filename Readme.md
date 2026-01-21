@@ -20,6 +20,8 @@ and offers enough of the platform specific API to be useful for creating full ap
 - Async API with [Tokio](https://tokio.rs/).
 - Not many dependencies.
 
+Currently there is no built-in support for timeouts on notifications (see [#4](https://github.com/Simon-Laux/user-notify/issues/4)).
+
 If you this crate is not for you, then you may like <https://github.com/hoodie/notify-rust>, which is an established crate, but has less feature support on macOS.
 
 ### System Requirements:

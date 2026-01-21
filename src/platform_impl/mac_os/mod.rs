@@ -1,3 +1,5 @@
+//! macOS implementation
+
 mod builder;
 mod delegate;
 mod handle;

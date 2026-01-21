@@ -1,6 +1,6 @@
 /// Category for the notification
 ///
-/// https://specifications.freedesktop.org/notification-spec/latest/categories.html
+/// <https://specifications.freedesktop.org/notification-spec/latest/categories.html>
 #[derive(Debug)]
 pub enum XdgNotificationCategory {
     /// A generic audio or video call notification that doesn't fit into any other category.

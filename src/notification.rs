@@ -115,7 +115,7 @@ where
 
     /// Set the xdg notification Category
     ///
-    /// The type of notification this is acording to https://specifications.freedesktop.org/notification-spec/latest/categories.html
+    /// The type of notification this is acording to <https://specifications.freedesktop.org/notification-spec/latest/categories.html>
     ///
     /// Platform specific: only work on linux, this does nothing on other platforms
     pub fn set_xdg_category(mut self, category: XdgNotificationCategory) -> Self {
@@ -215,7 +215,7 @@ where
 ///
 /// ## Platform-specific
 ///
-/// - **macOS**: https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/usernotificationcenter(_:didreceive:withcompletionhandler:)?language=objc
+/// - **macOS**: <https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/usernotificationcenter(_:didreceive:withcompletionhandler:)?language=objc>
 /// - **Other**: Unsupported.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
@@ -259,7 +259,7 @@ pub struct NotificationCategory {
 #[derive(Debug, Clone)]
 pub enum NotificationCategoryAction {
     /// ## Platform specific
-    /// https://developer.apple.com/documentation/usernotifications/unnotificationaction?language=objc
+    /// - macOS: <https://developer.apple.com/documentation/usernotifications/unnotificationaction?language=objc>
     Action {
         identifier: String,
         title: String,

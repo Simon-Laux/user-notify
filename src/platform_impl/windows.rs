@@ -1,6 +1,4 @@
-//! This manager logs the calls to it and does nothing more.
-//! It can be used for testing application code,
-//! or as a fallback for tauri's devmode that runs the app without a bundle id
+//! Windows implementation
 
 use std::collections::HashMap;
 use std::sync::{Arc, OnceLock};
@@ -47,6 +45,7 @@ impl NotificationHandle for NotificationHandleWindows {
     }
 }
 
+/// Windows implementation of NotificationManager
 pub struct NotificationManagerWindows {
     #[allow(clippy::type_complexity)]
     handler_callback:

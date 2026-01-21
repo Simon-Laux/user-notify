@@ -1,3 +1,5 @@
+//! Linux implementation
+
 mod category;
 
 use std::{
@@ -34,6 +36,7 @@ impl NotificationHandle for NotificationHandleXdg {
     }
 }
 
+/// Linux implementation of NotificationManager
 #[derive(Default)]
 pub struct NotificationManagerXdg {
     active_notifications: RwLock<Vec<NotificationHandleXdg>>,

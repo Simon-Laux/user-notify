@@ -33,6 +33,7 @@ pub struct NotificationManagerMacOSInner {
     pub(crate) bundle_id: Option<String>,
 }
 
+/// macOS implementation of NotificationManager
 #[derive(Debug, Clone)]
 pub struct NotificationManagerMacOS {
     pub(super) inner: Arc<NotificationManagerMacOSInner>,

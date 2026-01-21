@@ -89,11 +89,13 @@ RUST_LOG=debug cargo run --example test
 
 ### MacOS
 On MacOS you need a signed app package, otherwise notifications don't work.
-<!-- TODO confirm this: -->So may only work fully in released/packaged versions when you use tauri?
+So may only work fully in released/packaged versions when you use tauri, you can use the "mock" implementation in debug mode which just logs to the console.
 
 You can build and package the example (`examples/test.rs`) for macOS with this helper script:
-```
-./test_example_macos.sh
+```sh
+security find-identity -v -p codesigning
+# replace the zeros with the signing key you want to use
+APPLE_SIGNING_IDENTITY=00000000000000000000000000000000000000 ./test_example_macos.sh
 ```
 
 ## Windows

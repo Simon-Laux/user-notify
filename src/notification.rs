@@ -4,6 +4,7 @@ use async_trait::async_trait;
 
 use crate::{Error, xdg_category::XdgNotificationCategory};
 
+/// A builder struct for building notifications.
 #[derive(Debug, Default)]
 pub struct NotificationBuilder {
     pub(crate) body: Option<String>,
@@ -23,6 +24,7 @@ impl NotificationBuilder
 where
     Self: Sized,
 {
+    /// Create a new notification builder
     pub fn new() -> Self {
         NotificationBuilder {
             ..Default::default()
@@ -143,7 +145,7 @@ where
     }
 }
 
-// Handle to a sent notification
+/// A Handle to a sent notification
 pub trait NotificationHandle
 where
     Self: Send + Sync + Debug,
@@ -151,24 +153,79 @@ where
     /// Close the notification
     fn close(&self) -> Result<(), Error>;
 
+    /// Returns the id of the notification
     fn get_id(&self) -> String;
 
+    /// Returns the data stored inside of the notification
     fn get_user_info(&self) -> &HashMap<String, String>;
 }
 
-// https://developer.apple.com/documentation/usernotifications/unnotificationcontent/targetcontentidentifier
-// maybe offer a seperate api to catch notifications from previous sessions?
-// https://github.com/deltachat/deltachat-desktop/issues/2438
-
+/// Manager for active notifications.
+///
+/// It is needed to display notifications and to manage active notifications.
+///
+/// ## Send a notification with a button
+/// ```rust
+/// let manager = get_notification_manager("chat.delta.desktop.tauri".to_string(), None);
+/// let categories = vec![
+///     NotificationCategory {
+///         identifier: "my.app.question".to_string(),
+///         actions: vec![
+///             NotificationCategoryAction::Action {
+///                 identifier: "my.app.question.yes".to_string(),
+///                 title: "Yes".to_string(),
+///             },
+///             NotificationCategoryAction::Action {
+///                 identifier: "my.app.question.no".to_string(),
+///                 title: "No".to_string(),
+///             },
+///         ],
+///     },
+/// ];
+/// manager.register(
+///     Box::new(|response| {
+///         log::info!("got notification response: {response:?}");
+///     }),
+///     categories,
+/// )?;
+/// let notification = user_notify::NotificationBuilder::new()
+///    .title("Question")
+///    .body("are you fine?")
+///    .set_category_id("my.app.question");
+/// let notification_handle = manager.send_notification(notification).await?;
+/// ```
+///
+/// Note that on macOS you need to ask for permission on first start of your app, before you can send notifications:
+/// ```rust
+/// if let Err(err) = manager
+///    .first_time_ask_for_notification_permission()
+///    .await
+/// {
+///    println!("failed to ask for notification permission: {err:?}");
+/// }
+/// ```
 #[async_trait]
 pub trait NotificationManager
 where
     Self: Send + Sync + Debug,
 {
-    /// Needs to be called from main thread
+    /// Returns whether the app is allowed to send notifications
+    ///
+    /// Needs to be called from **main thread**.
+    ///
+    /// ## Platform specific:
+    /// - MacOS: "Authorized", "Provisional" and "Ephemeral" return `true`.
+    /// "Denied", "NotDetermined" and unknown return `false`.
+    /// - Other: no-op on other platforms (always returns true)
     async fn get_notification_permission_state(&self) -> Result<bool, crate::Error>;
 
-    /// Needs to be called from main thread
+    /// Ask for notification permission.
+    ///
+    /// Needs to be called from **main thread**.
+    ///
+    /// ## Platform specific:
+    /// - MacOS: only asks the user on the first time this method is called.
+    /// - Other: no-op on other platforms (always returns true)
     async fn first_time_ask_for_notification_permission(&self) -> Result<bool, Error>;
 
     /// Registers and initializes the notification handler and categories.
@@ -222,15 +279,19 @@ where
 pub struct NotificationResponse {
     /// id of the notification that was assigned by the system
     pub notification_id: String,
+    /// The action the user took to trigger the response
     pub action: NotificationResponseAction,
     /// The text that the user typed in as reponse
     ///
-    /// corresponds to [UNTextInputNotificationResponse.userText](https://developer.apple.com/documentation/usernotifications/untextinputnotificationresponse/usertext?language=objc)
+    /// ## Platform Specific
+    /// - MacOS: corresponds to [UNTextInputNotificationResponse.userText](https://developer.apple.com/documentation/usernotifications/untextinputnotificationresponse/usertext?language=objc)
+    /// - Linux: not supported
     pub user_text: Option<String>,
-
+    /// Data stored inside of the notification
     pub user_info: HashMap<String, String>,
 }
 
+/// An action the user took to trigger the [NotificationResponse]
 #[derive(Debug, Clone, PartialEq)]
 pub enum NotificationResponseAction {
     /// When user clicks on the notification
@@ -247,7 +308,14 @@ pub enum NotificationResponseAction {
     Other(String),
 }
 
-/// Notification Categories are used to define actions for notifications that have this category set
+/// Notification Categories are used to define actions
+/// for notifications that have this category set.
+///
+/// Think of it like a template for notications.
+/// To store data for a notification,
+/// use [NotificationBuilder::set_user_info]
+/// and retrieve it via [NotificationHandle::get_user_info]
+/// or [NotificationResponse::user_info].
 #[derive(Debug, Clone)]
 pub struct NotificationCategory {
     /// Id of the category by which it is referenced on notifications [NotificationBuilder::set_category_id]
@@ -256,20 +324,38 @@ pub struct NotificationCategory {
     pub actions: Vec<NotificationCategoryAction>,
 }
 
+/// An action to display in a notifications.
 #[derive(Debug, Clone)]
 pub enum NotificationCategoryAction {
+    /// Action button in a notification
     /// ## Platform specific
     /// - macOS: <https://developer.apple.com/documentation/usernotifications/unnotificationaction?language=objc>
+    /// - Linux: not implemented yet (https://github.com/Simon-Laux/user-notify/issues/1)
+    /// - Windows: not implemented yet (https://github.com/Simon-Laux/user-notify/issues/2)
     Action {
+        /// id of the action
         identifier: String,
+        /// Label of the button
         title: String,
         /* IDEA: also support icon https://developer.apple.com/documentation/usernotifications/unnotificationaction/init(identifier:title:options:icon:)?language=objc */
     },
+    /// Text input field in a notification.
+    ///
+    /// Example Usage: Can be used to reply to notifications of a messenger.
+    ///
+    /// ## Platform specific
+    /// - macOS: <https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction>
+    /// - Linux: not supported
+    /// - Windows: not implemented yet (https://github.com/Simon-Laux/user-notify/issues/2)
     TextInputAction {
+        /// id of the action
         identifier: String,
+        /// Label of the input field
         title: String,
         /* IDEA: also support icon and option https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction/init(identifier:title:options:textinputbuttontitle:textinputplaceholder:)?language=objc */
+        /// Label of the input button
         input_button_title: String,
+        /// Placeholder for the input field
         input_placeholder: String,
     },
 }

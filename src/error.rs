@@ -1,5 +1,8 @@
+#![allow(missing_docs)]
+
 use std::path::PathBuf;
 
+/// user-notify error type
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     // #[error(transparent)]

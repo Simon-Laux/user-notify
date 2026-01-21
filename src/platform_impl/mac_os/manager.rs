@@ -41,6 +41,7 @@ pub struct NotificationManagerMacOS {
 
 impl NotificationManagerMacOS {
     #[allow(clippy::new_without_default)]
+    /// Creates a new Notification Manager for macOS
     pub fn new() -> Self {
         log::debug!("NotificationManager.new called");
         Self {

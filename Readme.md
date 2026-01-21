@@ -28,9 +28,6 @@ If you this crate is not for you, then you may like <https://github.com/hoodie/n
 - Windows 10 or above
 - Linux with a desktop/notification-daemon which supports the `org.freedesktop.Notifications` dbus protocol. (most modern desktop environments do)
 
-### Features by operating system
-TODO <!--- TODO: feature by OS table--->
-
 ## Usage
 
 TODO <!-- TODO -->
@@ -41,6 +38,44 @@ This library was initially created as replacement for tauri's notification APIs,
 implement all notification features that we needed for our project
 of porting the [Delta Chat instant messenger](https://github.com/deltachat/deltachat-desktop) from electron to [tauri](https://tauri.app/)
 (Basic features like reacting to clicks on notifications were missing in the rust api).
+
+
+### Features by operating system
+
+Legend:
+- ✅ — is supported
+- `#issue-number` — tracking issue for implementing it
+- ❌ — not planned, since platform has no support for it (yet)
+- NO — not necessary on platform, so implemented as “no operation”
+- 🏃 — does not work across sessions, just in current session
+
+| what                                                                                                                                         | api                                                               | MacOS | Linux                                                    | Windows                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----- | -------------------------------------------------------- | -------------------------------------------------------- |
+| Primary description                                                                                                                          | `Notification.title`                                              | ✅     | ✅                                                        | ✅                                                        |
+| Main content                                                                                                                                 | `Notification.body`                                               | ✅     | ✅                                                        | ✅                                                        |
+| secondary description                                                                                                                        | `Notification.subtitle`                                           | ✅     | ❌                                                        | ✅                                                        |
+| Image Attachment                                                                                                                             | `Notification.set_image`                                          | ✅     | ✅                                                        | ✅                                                        |
+| Override app icon                                                                                                                            | `Notification.set_icon`                                           | ❌     | ✅                                                        | ✅                                                        |
+| Group notifications <br>by thread                                                                                                            | `Notification.set_thread_id`                                      | ✅     | ❌                                                        | [#3](https://github.com/Simon-Laux/user-notify/issues/3) |
+| Set category/template with actions                                                                                                           | `Notification.set_category_id`                                    | ✅     | ✅                                                        | ✅                                                        |
+| Set notification data                                                                                                                        | `Notification.set_user_info`                                      | ✅     | ✅🏃                                                      | ✅                                                        |
+| Persistent notifications across sessions<br>(keeping their data even when you restart the app / handle notifications from previous sessions) | -                                                                 | ✅     | ❌                                                        | ✅                                                        |
+| Get permission state                                                                                                                         | `NotificationManager .get_notification_permission_state`          | ✅     | ❌                                                        | NO                                                       |
+| Ask for permission                                                                                                                           | `NotificationManager .first_time_ask_for_notification_permission` | ✅     | ❌                                                        | ❌                                                        |
+| Remove all notifications                                                                                                                     | `NotificationManager .remove_all_delivered_notifications`         | ✅     | ✅🏃                                                      | ✅                                                        |
+| Remove notifications by id                                                                                                                   | `NotificationManager .remove_delivered_notifications`             | ✅     | ✅🏃                                                      | ✅                                                        |
+| Get still active notifications                                                                                                               | `NotificationManager .get_active_notifications`                   | ✅     | ✅🏃                                                      | ✅🏃                                                      |
+| Action: Button                                                                                                                               | `NotificationCategoryAction::Action`                              | ✅     | [#1](https://github.com/Simon-Laux/user-notify/issues/1) | [#2](https://github.com/Simon-Laux/user-notify/issues/2) |
+| Action: reply input field                                                                                                                    | `NotificationCategoryAction::TextInputAction`                     | ✅     | ❌                                                        | [#2](https://github.com/Simon-Laux/user-notify/issues/2) |
+
+Platform specific API:
+
+| what                                                                                                        | api                                | MacOS | Linux | Windows |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------------- | ----- | ----- | ------- |
+| Set App icon to be round                                                                                    | `Notification.set_icon_round_crop` | ❌     | ❌     | ✅       |
+| Set [xdg notification Category](https://specifications.freedesktop.org/notification/latest/categories.html) | `Notification.set_xdg_category`    | ❌     | ✅     | ❌       |
+| Override app name                                                                                           | `Notification.set_xdg_app_name`    | ❌     | ✅     | ❌       |
+
 
 ## Testing the example
 

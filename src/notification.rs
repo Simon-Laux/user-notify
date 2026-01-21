@@ -186,9 +186,13 @@ where
     ///
     /// ## Platform specific:
     /// - MacOS: [UNUserNotificationCenter.removeAllDeliveredNotifications](https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removealldeliverednotifications())
+    /// - Linux: only works for notifications from current session, because notification handles are tracked in memory
     fn remove_all_delivered_notifications(&self) -> Result<(), Error>;
 
     /// Removes specific delivered notifications by their id from Notification Center.
+    ///
+    /// ## Platform specific:
+    /// - Linux: only works for notifications from current session, because notification handles are tracked in memory
     fn remove_delivered_notifications(&self, ids: Vec<&str>) -> Result<(), Error>;
 
     /// Get all deliverd notifications from UNUserNotificationCenter that are still active.

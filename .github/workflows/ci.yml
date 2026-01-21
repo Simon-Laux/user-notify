@@ -1,0 +1,54 @@
+name: Rust CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  RUSTFLAGS: -Dwarnings
+  RUST_VERSION: 1.92.0
+
+jobs:
+  lint_rust:
+    name: Lint Rust
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          show-progress: false
+          persist-credentials: false
+      - name: Install rustfmt and clippy
+        run: rustup toolchain install $RUST_VERSION --profile minimal --component rustfmt --component clippy
+      - run: rustup override set $RUST_VERSION
+        shell: bash
+      - name: Cache rust cargo artifacts
+        uses: swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5
+      - name: Run rustfmt
+        run: cargo fmt --all -- --check
+      - name: Run clippy
+        run: cargo clippy
+
+  docs:
+    name: Rust doc comments
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    env:
+      RUSTDOCFLAGS: -Dwarnings
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          show-progress: false
+          persist-credentials: false
+      - name: Cache rust cargo artifacts
+        uses: swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5
+      - name: Rustdoc
+        run: cargo doc --document-private-items --no-deps

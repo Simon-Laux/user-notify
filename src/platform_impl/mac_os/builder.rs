@@ -57,7 +57,7 @@ fn build(
             // file needs to be copied, because macOS will move it to internal datastore and delete it afterwards.
             let copied_file_path = env::temp_dir().join(format!(
                 "{}.{}",
-                uuid::Uuid::new_v4().to_string(),
+                uuid::Uuid::new_v4(),
                 original_path
                     .extension()
                     .and_then(|e| e.to_str())

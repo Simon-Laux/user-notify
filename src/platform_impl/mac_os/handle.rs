@@ -28,14 +28,12 @@ impl NotificationHandle for NotificationHandleMacOS {
         let id = NSString::from_str(&self.id);
         let array: Retained<NSArray<NSString>> = NSArray::from_retained_slice(&[id]);
 
-        unsafe {
-            NSBundle::mainBundle()
-                .bundleIdentifier()
-                .ok_or(Error::NoBundleId)?;
+        NSBundle::mainBundle()
+            .bundleIdentifier()
+            .ok_or(Error::NoBundleId)?;
 
-            UNUserNotificationCenter::currentNotificationCenter()
-                .removeDeliveredNotificationsWithIdentifiers(&array);
-        }
+        UNUserNotificationCenter::currentNotificationCenter()
+            .removeDeliveredNotificationsWithIdentifiers(&array);
         Ok(())
     }
 

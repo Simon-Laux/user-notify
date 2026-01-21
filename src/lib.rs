@@ -24,7 +24,7 @@ pub fn get_notification_manager(
     #[cfg(target_os = "macos")]
     {
         use objc2_foundation::NSBundle;
-        if unsafe { NSBundle::mainBundle().bundleIdentifier().is_none() } {
+        if NSBundle::mainBundle().bundleIdentifier().is_none() {
             return Arc::new(platform_impl::mock::NotificationManagerMock::new())
                 as Arc<dyn NotificationManager>;
         }

@@ -57,7 +57,7 @@ fn build(
             // file needs to be copied, because macOS will move it to internal datastore and delete it afterwards.
             let copied_file_path = env::temp_dir().join(format!(
                 "{}.{}",
-                uuid::Uuid::new_v4().to_string(),
+                uuid::Uuid::new_v4(),
                 original_path
                     .extension()
                     .and_then(|e| e.to_str())
@@ -120,25 +120,23 @@ fn build(
         notification
     };
 
-    unsafe {
-        let bundle_id = manager
-            .inner
-            .bundle_id
-            .as_ref()
-            .map(|s| NSString::from_str(s))
-            .ok_or(Error::NoBundleId)?;
-        // log::trace!("bundle_id: {bundle_id:?}");
+    let bundle_id = manager
+        .inner
+        .bundle_id
+        .as_ref()
+        .map(|s| NSString::from_str(s))
+        .ok_or(Error::NoBundleId)?;
+    // log::trace!("bundle_id: {bundle_id:?}");
 
-        let id = format!("{}.{}", Uuid::new_v4(), bundle_id);
+    let id = format!("{}.{}", Uuid::new_v4(), bundle_id);
 
-        let r = UNNotificationRequest::requestWithIdentifier_content_trigger(
-            &NSString::from_str(&id),
-            &notification,
-            None,
-        );
+    let r = UNNotificationRequest::requestWithIdentifier_content_trigger(
+        &NSString::from_str(&id),
+        &notification,
+        None,
+    );
 
-        log::trace!("{r:?}  -- {:?}", r.identifier());
+    log::trace!("{r:?}  -- {:?}", r.identifier());
 
-        Ok((r, id, user_info))
-    }
+    Ok((r, id, user_info))
 }

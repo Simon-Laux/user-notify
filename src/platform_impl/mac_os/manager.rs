@@ -84,7 +84,7 @@ impl NotificationManagerMacOS {
 
 #[async_trait]
 impl NotificationManager for NotificationManagerMacOS {
-    /// https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/getnotificationsettings(completionhandler:)
+    /// <https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/getnotificationsettings(completionhandler:)>
     async fn get_notification_permission_state(&self) -> Result<bool, Error> {
         self.inner.bundle_id.as_ref().ok_or(Error::NoBundleId)?;
         let (tx, rx) = tokio::sync::oneshot::channel::<bool>();
@@ -116,7 +116,7 @@ impl NotificationManager for NotificationManagerMacOS {
         Ok(rx.await?)
     }
 
-    /// https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/requestauthorization(options:completionhandler:)
+    /// <https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/requestauthorization(options:completionhandler:)>
     async fn first_time_ask_for_notification_permission(&self) -> Result<bool, Error> {
         self.inner.bundle_id.as_ref().ok_or(Error::NoBundleId)?;
         let (tx, rx) = tokio::sync::oneshot::channel::<Result<bool, Error>>();
@@ -190,7 +190,7 @@ impl NotificationManager for NotificationManagerMacOS {
 
     /// Removes all of your app’s delivered notifications from Notification Center.
     ///
-    /// https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removealldeliverednotifications()
+    /// <https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removealldeliverednotifications()>
     fn remove_all_delivered_notifications(&self) -> Result<(), Error> {
         self.inner.bundle_id.as_ref().ok_or(Error::NoBundleId)?;
 

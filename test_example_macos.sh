@@ -24,7 +24,7 @@ cat <<EOF > "$TARGET_DIR/TestExample.app/Contents/Info.plist"
     <key>CFBundleVersion</key>
     <string>0.1.0</string>
     <key>CFBundleIdentifier</key>
-    <string>test-example.tauri.chat.delta</string>
+    <string>com.example.test-example</string>
     <key>CFBundleExecutable</key>
     <string>test</string>
 </dict>

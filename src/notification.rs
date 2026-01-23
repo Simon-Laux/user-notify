@@ -166,7 +166,7 @@ where
 ///
 /// ## Send a notification with a button
 /// ```rust
-/// let manager = get_notification_manager("chat.delta.desktop.tauri".to_string(), None);
+/// let manager = get_notification_manager("com.example.my.app".to_string(), None);
 /// let categories = vec![
 ///     NotificationCategory {
 ///         identifier: "my.app.question".to_string(),

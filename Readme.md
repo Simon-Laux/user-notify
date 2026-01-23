@@ -39,7 +39,7 @@ TODO <!-- TODO -->
 This library was initially created as replacement for tauri's notification APIs, because they did not
 implement all notification features that we needed for our project
 of porting the [Delta Chat instant messenger](https://github.com/deltachat/deltachat-desktop) from electron to [tauri](https://tauri.app/)
-(Basic features like reacting to clicks on notifications were missing in the rust api).
+(Basic features like [reacting to clicks](https://github.com/tauri-apps/plugins-workspace/issues/2150#issuecomment-3782406762) on notifications were missing in the rust api).
 
 
 ### Features by operating system

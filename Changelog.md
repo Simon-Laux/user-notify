@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 - publish to crates.io
+
+- fix license string
+- fix cargo exclude list
+
 ## 0.3.0 - Dedicated repo
 
 `user-notify` now has it's own repo.

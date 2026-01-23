@@ -75,6 +75,10 @@ impl std::fmt::Debug for NotificationManagerWindows {
 const MESSAGE_GROUP: &str = "msg-group";
 
 impl NotificationManagerWindows {
+    /// Creates Notification manager for Windows.
+    ///
+    /// `notification_protocol` is the custom URI scheme that is used for notifications in your app. Your app should be registered as default handler for this scheme,
+    ///  So it opens your app, even when your app was not active.
     pub fn new(app_id: String, notification_protocol: Option<String>) -> Self {
         Self {
             handler_callback: Arc::new(OnceLock::new()),
@@ -261,7 +265,7 @@ impl NotificationManager for NotificationManagerWindows {
 
         let mut handles: Vec<NotificationHandleWindows> = Vec::new();
 
-        for toast in history.into_iter() {
+        for toast in history {
             let user_info: HashMap<String, String> =
                 Self::user_info_from_toast(&toast).unwrap_or_default(); // IDEA: log error
             handles.push(NotificationHandleWindows {

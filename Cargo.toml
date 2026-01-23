@@ -1,11 +1,11 @@
 [package]
 name = "user-notify"
 description = "Show desktop notifications to end users on linux, macOS and windows."
-version = "0.4.0"
+version = "0.4.1"
 edition = "2024"
 authors = ["Simon Laux <git@simonlaux.de>", "WofWca <wofwca@protonmail.com>"]
 license = "LGPL-3.0-or-later"
-keywords = ["notify", "notification", "UserNotification", "desktop-notifications", "linux", "windows", "macOS"]
+keywords = ["notify", "notification", "UserNotification", "desktop-notifications"]
 repository = "https://github.com/Simon-Laux/user-notify"
 exclude = ["examples/", "test_example_macos.sh", "flake.lock", "flake.nix", ".github/"]
 

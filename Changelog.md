@@ -1,5 +1,7 @@
 # Changelog
 
+- fix readme not shown on crates.io
+
 ## 0.4.1 - publish to crates.io
 
 - remove some keywords to fit into limit of 5 keywords and comply to other keyword rules

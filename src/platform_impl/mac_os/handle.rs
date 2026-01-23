@@ -6,6 +6,7 @@ use objc2_user_notifications::UNUserNotificationCenter;
 
 use crate::{Error, NotificationHandle};
 
+/// Handle to a macOS notification
 #[derive(Debug)]
 pub struct NotificationHandleMacOS {
     id: String,

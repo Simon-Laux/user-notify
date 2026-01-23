@@ -1,6 +1,22 @@
 //! Show desktop notifications to end users on linux, macOS and windows.
 //!
 //! If you want to see the platform implementation and view this on docs.rs, then make sure to select the correct platform in the header bar.
+
+#![deny(
+    unused,
+    clippy::correctness,
+    missing_debug_implementations,
+    missing_docs,
+    clippy::all,
+    clippy::doc_broken_link,
+    clippy::wildcard_imports,
+    clippy::needless_borrow,
+    clippy::cast_lossless,
+    clippy::unused_async,
+    clippy::explicit_iter_loop,
+    clippy::explicit_into_iter_loop,
+    clippy::cloned_instead_of_copied
+)]
 mod error;
 mod notification;
 mod platform_impl;

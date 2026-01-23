@@ -24,6 +24,7 @@ use crate::{
 
 use base64::Engine;
 
+/// Notification handle on windows
 #[derive(Debug, Clone)]
 pub struct NotificationHandleWindows {
     id: String,
@@ -74,6 +75,10 @@ impl std::fmt::Debug for NotificationManagerWindows {
 const MESSAGE_GROUP: &str = "msg-group";
 
 impl NotificationManagerWindows {
+    /// Creates Notification manager for Windows.
+    ///
+    /// `notification_protocol` is the custom URI scheme that is used for notifications in your app. Your app should be registered as default handler for this scheme,
+    ///  So it opens your app, even when your app was not active.
     pub fn new(app_id: String, notification_protocol: Option<String>) -> Self {
         Self {
             handler_callback: Arc::new(OnceLock::new()),
@@ -222,7 +227,7 @@ impl NotificationManager for NotificationManagerWindows {
             .map_err(|_| Error::SettingHandler)?;
         // register handlers to all notifications of last session
         let history = self.get_history()?;
-        for toast in history.into_iter() {
+        for toast in history {
             if let Err(err) = self.register_event_listeners(&toast) {
                 log::error!(
                     "failed to register event listener to toast from previous session {err:?}"
@@ -260,7 +265,7 @@ impl NotificationManager for NotificationManagerWindows {
 
         let mut handles: Vec<NotificationHandleWindows> = Vec::new();
 
-        for toast in history.into_iter() {
+        for toast in history {
             let user_info: HashMap<String, String> =
                 Self::user_info_from_toast(&toast).unwrap_or_default(); // IDEA: log error
             handles.push(NotificationHandleWindows {
@@ -454,6 +459,14 @@ fn encode_deeplink(scheme: &str, action: &NotificationResponse) -> String {
     format!("{scheme}://{notification_id}/{action_string}?{launch_attribute}")
 }
 
+/// Decode action deeplink,
+/// Returns the the decoded NotificationResponse.
+///
+/// Use this in your app to handle notification actions that started your app
+/// (like notification is clicked when your app is not running and then opens your app).
+///
+/// You can find an example how to use this in tauri in conjunction with the deeplink plugin in the delta chat tauri project:
+/// <https://github.com/deltachat/deltachat-desktop/blob/174a9cdbe34f0848033a6afc43fc10a29c5ca494/packages/target-tauri/src-tauri/src/deeplink.rs#L87>
 pub fn decode_deeplink(link: &str) -> Result<NotificationResponse, Error> {
     let url = url::Url::parse(link)?;
 

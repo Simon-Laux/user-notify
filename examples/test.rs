@@ -44,12 +44,9 @@ async fn main() -> anyhow::Result<()> {
     #[cfg(target_os = "macos")]
     {
         let manager_clone = manager.clone();
-        if let Err(err) = spawn(async move {
-            manager_clone
-                .first_time_ask_for_notification_permission()
-                .await
-        })
-        .await
+        if let Err(err) = manager_clone
+            .first_time_ask_for_notification_permission()
+            .await
         {
             println!("failed to ask for notification permission: {err:?}");
         }

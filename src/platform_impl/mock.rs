@@ -9,6 +9,7 @@ use tokio::sync::RwLock;
 
 use crate::{NotificationBuilder, NotificationHandle, NotificationManager};
 
+/// Handle to a mock notification
 #[derive(Debug, Clone)]
 pub struct NotificationHandleMock {
     id: String,
@@ -30,12 +31,16 @@ impl NotificationHandle for NotificationHandleMock {
     }
 }
 
+/// Mock notification manager
+///
+/// This manager logs the calls to it and does nothing more.
 #[derive(Debug, Default)]
 pub struct NotificationManagerMock {
     active_notifications: RwLock<Vec<NotificationHandleMock>>,
 }
 
 impl NotificationManagerMock {
+    /// Creates new mock notification manager
     pub fn new() -> Self {
         Self::default()
     }

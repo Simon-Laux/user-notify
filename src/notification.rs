@@ -330,8 +330,8 @@ pub enum NotificationCategoryAction {
     /// Action button in a notification
     /// ## Platform specific
     /// - macOS: <https://developer.apple.com/documentation/usernotifications/unnotificationaction?language=objc>
-    /// - Linux: not implemented yet (https://github.com/Simon-Laux/user-notify/issues/1)
-    /// - Windows: not implemented yet (https://github.com/Simon-Laux/user-notify/issues/2)
+    /// - Linux: not implemented yet (<https://github.com/Simon-Laux/user-notify/issues/1>)
+    /// - Windows: not implemented yet (<https://github.com/Simon-Laux/user-notify/issues/2>)
     Action {
         /// id of the action
         identifier: String,
@@ -346,7 +346,7 @@ pub enum NotificationCategoryAction {
     /// ## Platform specific
     /// - macOS: <https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction>
     /// - Linux: not supported
-    /// - Windows: not implemented yet (https://github.com/Simon-Laux/user-notify/issues/2)
+    /// - Windows: not implemented yet (<https://github.com/Simon-Laux/user-notify/issues/2>)
     TextInputAction {
         /// id of the action
         identifier: String,

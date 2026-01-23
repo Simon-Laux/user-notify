@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.4.2
+
 - fix readme not shown on crates.io
 
 ## 0.4.1 - publish to crates.io

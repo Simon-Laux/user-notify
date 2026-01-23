@@ -8,6 +8,7 @@ license = "LGPL-3.0-or-later"
 keywords = ["notify", "notification", "UserNotification", "desktop"]
 repository = "https://github.com/Simon-Laux/user-notify"
 exclude = ["examples/", "test_example_macos.sh", "flake.lock", "flake.nix", ".github/"]
+readme = "Readme.md"
 
 [dependencies]
 anyhow = "1.0.97"

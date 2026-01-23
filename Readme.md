@@ -32,7 +32,9 @@ If you this crate is not for you, then you may like <https://github.com/hoodie/n
 
 ## Usage
 
-TODO <!-- TODO -->
+TODO <!-- TODO -->: for now look in these places:
+- [`examples/test.rs`](./examples/test.rs)
+- How delta chat desktop tauri uses it: <https://github.com/search?q=repo%3Adeltachat%2Fdeltachat-desktop+user_notify&type=code>
 
 ## History of this crate
 

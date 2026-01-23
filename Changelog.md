@@ -2,7 +2,7 @@
 
 ## 0.4.1 - publish to crates.io
 
-- remove some keywords to fit into limit of 5 keywords
+- remove some keywords to fit into limit of 5 keywords and comply to other keyword rules
 
 ## 0.4.0 - publish to crates.io
 

@@ -14,6 +14,7 @@ use tokio::sync::RwLock;
 
 use crate::{NotificationBuilder, NotificationHandle, NotificationManager, NotificationResponse};
 
+/// Handle to linux notification
 #[derive(Debug, Clone)]
 pub struct NotificationHandleXdg {
     id: String,
@@ -54,6 +55,7 @@ impl std::fmt::Debug for NotificationManagerXdg {
 }
 
 impl NotificationManagerXdg {
+    /// Create notification manager for linux
     pub fn new() -> Self {
         Self::default()
     }

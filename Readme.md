@@ -51,7 +51,7 @@ Legend:
 - NO — not necessary on platform, so implemented as “no operation”
 - 🏃 — does not work across sessions, just in current session
 
-| what                                                                                                                                         | api                                                               | MacOS | Linux                                                    | Windows                                                  |
+| What                                                                                                                                         | API                                                               | macOS | Linux                                                    | Windows                                                  |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----- | -------------------------------------------------------- | -------------------------------------------------------- |
 | Primary description                                                                                                                          | `Notification.title`                                              | ✅     | ✅                                                        | ✅                                                        |
 | Main content                                                                                                                                 | `Notification.body`                                               | ✅     | ✅                                                        | ✅                                                        |
@@ -72,7 +72,7 @@ Legend:
 
 Platform specific API:
 
-| what                                                                                                        | api                                | MacOS | Linux | Windows |
+| What                                                                                                        | API                                | macOS | Linux | Windows |
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------------- | ----- | ----- | ------- |
 | Set App icon to be round                                                                                    | `Notification.set_icon_round_crop` | ❌     | ❌     | ✅       |
 | Set [xdg notification Category](https://specifications.freedesktop.org/notification/latest/categories.html) | `Notification.set_xdg_category`    | ❌     | ✅     | ❌       |
@@ -87,8 +87,8 @@ Platform specific API:
 RUST_LOG=debug cargo run --example test
 ```
 
-### MacOS
-On MacOS you need a signed app package, otherwise notifications don't work.
+### macOS
+On macOS you need a signed app package, otherwise notifications don't work.
 So may only work fully in released/packaged versions when you use tauri, you can use the "mock" implementation in debug mode which just logs to the console.
 
 You can build and package the example (`examples/test.rs`) for macOS with this helper script:

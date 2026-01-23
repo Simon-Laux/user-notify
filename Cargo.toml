@@ -1,7 +1,7 @@
 [package]
 name = "user-notify"
 description = "Show desktop notifications to end users on linux, macOS and windows."
-version = "0.4.1"
+version = "0.4.2"
 edition = "2024"
 authors = ["Simon Laux <git@simonlaux.de>", "WofWca <wofwca@protonmail.com>"]
 license = "LGPL-3.0-or-later"

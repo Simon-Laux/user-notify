@@ -7,7 +7,7 @@ use user_notify::{NotificationCategory, NotificationCategoryAction, get_notifica
 async fn main() -> anyhow::Result<()> {
     env_logger::init();
     log::debug!("0");
-    let manager = get_notification_manager("chat.delta.desktop.tauri".to_string(), None);
+    let manager = get_notification_manager("com.example.test-example".to_string(), None);
 
     let categories = vec![
         NotificationCategory {

@@ -1,5 +1,7 @@
 # Changelog
 
+- docs(readme): feature support table: move api column to end and link api methods to docs
+
 ## 0.4.2
 
 - fix readme not shown on crates.io

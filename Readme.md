@@ -112,6 +112,7 @@ These links can be useful for reference when contributing to this plugin.
 - macOS:
   - https://developer.apple.com/documentation/usernotifications
   - https://lib.rs/crates/objc2-user-notifications/features#feature-UNNotificationCategory
+  - overview of objc2 crate: [youtube: 13th Bevy Meetup - Mads - Bevy on iOS](https://www.youtube.com/watch?v=wv76dB2yATk)
 - Windows:
   - https://docs.rs/tauri-winrt-notification/latest/tauri_winrt_notification/struct.Toast.html
   - https://learn.microsoft.com/en-us/uwp/api/windows.ui.notifications.toastnotification

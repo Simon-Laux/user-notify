@@ -3,6 +3,8 @@ pub mod mac_os;
 pub mod mock;
 #[cfg(target_os = "windows")]
 pub mod windows;
+#[cfg(any(target_os = "windows", test))]
+pub(crate) mod windows_deeplink;
 #[cfg(any(
     target_os = "linux",
     target_os = "dragonfly",

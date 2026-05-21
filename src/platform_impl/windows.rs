@@ -22,6 +22,7 @@ use crate::{
     NotificationResponseAction,
 };
 
+use super::windows_deeplink::decode_action_path;
 use base64::Engine;
 
 /// Notification handle on windows
@@ -484,11 +485,7 @@ pub fn decode_deeplink(link: &str) -> Result<NotificationResponse, Error> {
 
     Ok(NotificationResponse {
         notification_id: url.host().map(|host| host.to_string()).unwrap_or_default(),
-        action: match url.path().to_string().as_str() {
-            "/__default__" => NotificationResponseAction::Default,
-            "/__dismiss__" => NotificationResponseAction::Dismiss,
-            action => NotificationResponseAction::Other(action.to_owned()),
-        },
+        action: decode_action_path(url.path()),
         user_text: None,
         user_info,
     })
